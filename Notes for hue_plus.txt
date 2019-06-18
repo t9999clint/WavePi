@@ -21,8 +21,9 @@ sudo tar xzf Python-3.6.0.tgz
 sudo -s
 cd Python-3.6.0
 make -j 4
-make install
+make altinstall
 exit
+##REBOOT PI, then move to step two
 
 
 
