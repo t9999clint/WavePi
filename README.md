@@ -3,7 +3,7 @@ Multifuntion synth platform for Raspberry Pi and other single board computers.
 
 Project page... https://www.retroimperfections.com/wavepi/
 
-Discussion Forum... https://www.vogons.org/viewtopic.php?f=62&t=65908&sid=f9c2322b56f35e529f512d1f13d20b6a
+Discussion Forum... https://www.vogons.org/viewtopic.php?f=62&t=65908
 
 
 WavePi aims to be a Open Source, all in one synth solution for older PCs that lack the grunt to use modern synthesizer software.
