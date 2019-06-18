@@ -1,0 +1,73 @@
+I know it's not important for most of you, but I got a copy of the NZXT HUE+ software to run on a raspberry pi.
+Now I have a RGB led kit in my MS-DOS gaming rig that I can change however I like.
+Please note that audio level monitoring seems to use up too many cpu cycles and is too glitchy to run well on a ras pi 3B+
+so it's probably not worth bothering with that for now...
+
+I'm probably gonna release some arm .deb binaries for this cause it takes about 2+ hours to compile it all.
+
+
+
+1. Download and compile python 3.6...
+##prepare build environment...
+sudo apt-get update
+sudo apt-get install build-essential checkinstall libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev qt5-default pyqt5-dev pyqt5-dev-tools sip-dev -yy
+
+##download and extract sourcecode, replace link with newest release of python 3.6...
+cd /usr/src
+sudo wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
+sudo tar xzf Python-3.6.0.tgz
+
+##compile...
+sudo -s
+cd Python-3.6.0
+
+
+
+2. Download and compile SIP and PyQt5
+##download sip, replace link with latest version
+cd /usr/src
+sudo wget https://www.riverbankcomputing.com/static/Downloads/sip/sip-4.19.14.tar.gz
+sudo tar xzf sip-4.19.14.tar.gz
+cd sip-4.19.14
+
+##compile sip
+sudo -s
+python3.6 configure.py --sip-module=PyQt5.sip
+make
+make install
+
+##download PyQt5 replace link with latest version
+cd /usr/src
+sudo -s
+wget https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5_gpl-5.12.tar.gz
+tar xzf PyQt5_gpl-5.12.tar.gz
+cd PyQt5_gpl-5.12
+
+##compile PyQt5, this is the part that takes 2 hours
+python3.6 configure.py
+make
+make install
+exit
+
+
+
+3. Download and compile hue_plus
+## configure python3.6 for hue_plus dependancies
+sudo pip3.6 install --upgrade pip
+sudo pip3.6 install pyserial
+sudo pip3.6 install pyaudio
+
+##Download hue_plus, replace link with latest version
+cd /usr/src
+sudo -s
+wget https://github.com/kusti8/hue-plus/archive/v.1.4.5.tar.gz
+tar xzf v.1.4.5.tar.gz
+cd hue-plus-v.1.4.5
+
+##compile and install hue_plus
+python3.6 setup.py build
+python3.6 setup.py install
+exit
+
+then you can run the hue application. 
+I like to use... hue alternating -b -m 2 1 aa1100 550000
