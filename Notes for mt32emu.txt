@@ -2,7 +2,7 @@
 
 ## Setup development enviroment
 sudo apt update
-sudo apt install libasound libx11 libxpm libxt
+sudo apt install build-essential libasound libx11 libxpm libxt
 
 ## Download mt32emu, replace link with latest version...
 cd /usr/src
