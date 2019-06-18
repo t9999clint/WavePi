@@ -24,5 +24,10 @@ if (( CPU_LIMIT > 1)); then
 fi
 POLY_LIMIT = $((CPU_LIMIT * 75))
 
+## sanity check for poly limit (max of 999)
+if (( POLY_LIMIT > 999)); then
+    POLY_LIMIT = 999
+fi
+
 ## launch fluiddynth with set priority
 nice -n $FLUID_PRIORITY /usr/local/bin/fluidsynth -o synth.cpu-cores=$CPU_LIMIT -o audio.alsa.device=hw:$2 -o audio.period-size=64 -o synth.polyphony=$POLY_LIMIT -R 0 -C 0 -is -r 44100 --gain 0.6 --audio-driver=alsa "$1"
