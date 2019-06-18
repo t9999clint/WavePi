@@ -1,5 +1,6 @@
 #!/bin/bash
-## fluidsynth.sh synth script example ##
+## fluidsynth.sh synth script example
+## This script is meant to be run with the following syntax fluidsynth.sh <sf2 file> <alsa device number>
 
 ## priority of the fluidsynth program. (-20 to 19, lower is better)
 FLUID_PRIORITY = -18
