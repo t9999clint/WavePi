@@ -1,0 +1,28 @@
+###mt32emu requires CMake to build.
+
+## Setup development enviroment
+sudo apt update
+sudo apt install libasound libx11 libxpm libxt
+
+## Download mt32emu, replace link with latest version...
+cd /usr/src
+sudo wget https://github.com/munt/munt/archive/munt_2_3_0.tar.gz
+sudo tar xzf munt_2_3_0.tar.gz
+cd munt-munt_2_3_0
+
+## Compile and install mt32emu
+sudo -s
+cd mt32emu
+cmake -DCMAKE_BUILD_TYPE:STRING=Release .
+make
+make install -j 4
+cd ..
+exit
+
+## Compile and install mt32emu alsa driver
+sudo -s
+cd mt32emu-alsadrv
+make
+make install
+cd ..
+exit
