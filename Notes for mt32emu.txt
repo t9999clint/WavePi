@@ -11,7 +11,10 @@ cd munt-munt_2_3_0
 ## Compile and install mt32emu
 sudo -s
 cd mt32emu
-cmake -DCMAKE_BUILD_TYPE:STRING=Release .
+export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+
+cmake -DCMAKE_BUILD_TYPE:STRING=Release -Dmunt_WITH_MT32EMU_QT:BOOL=OFF .
 make -j 4
 make install
 cd ..
@@ -24,3 +27,6 @@ make -j 4
 make install
 cd ..
 exit
+
+
+## might need to look into...  echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
