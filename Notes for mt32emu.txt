@@ -14,7 +14,7 @@ cd mt32emu
 export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 
-cmake -DCMAKE_BUILD_TYPE:STRING=Release -Dmunt_WITH_MT32EMU_QT:BOOL=OFF .
+cmake -DCMAKE_BUILD_TYPE:STRING=Release .
 make -j 4
 make install
 cd ..
