@@ -13,7 +13,22 @@ source "$CURRENT_DIR/../configs/main.cfg"
 
 ## Wait's for synth to finish loading and get's it's MIDI device number
 WaitForSynth () {
-
+    ## define varibles
+    local LOOP_CYCLE=0
+    local MAX_WAIT=1000
+    local MIDI_NUMBER=-1
+    while ((LOOP_CYCLE < MAX_WAIT));
+    then
+        if (aconnect -o | grep $1 == true)
+        then
+            LOOP_CYCLE=$MAX_WAIT
+            MIDI_NUMBER=$(aconnect -o | grep  -Eo '[0-9]{3}.*FLUID' | grep -Eo '[0-9]{3}')
+        else
+            LOOP_CYCLE=$(LOOP_CYCLE + 1)
+            wait 0.1
+        fi
+    fi
+    return $MIDI_NUMBER
 }
 
 ## Save's PID and other information to a file
@@ -34,7 +49,7 @@ StartSynth () {
     $COMMAND $AUDIO_DEVICE & SYNTH_PID=$!
     
     ## wait for synth to load, get midi device number
-    SYNTH_MIDI=WaitForSynth($SYNTH_SEARCH)
+    local SYNTH_MIDI=WaitForSynth($SYNTH_SEARCH)
     
     ## check if midi actually loaded or not
     if (( SYNTH_MIDI = -1 ));
