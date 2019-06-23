@@ -22,7 +22,7 @@ WaitForSynth () {
         if (aconnect -o | grep $1 == true)
         then
             LOOP_CYCLE=$MAX_WAIT
-            MIDI_NUMBER=$(aconnect -o | grep  -Eo '[0-9]{3}.*FLUID' | grep -Eo '[0-9]{3}')
+            MIDI_NUMBER=$(aconnect -o | grep  -Eo '[0-9]{3}.*$1' | grep -Eo '[0-9]{3}')
         else
             LOOP_CYCLE=$(LOOP_CYCLE + 1)
             wait 0.1
@@ -39,7 +39,7 @@ SaveStatusToFile () {
 ## Start Synth with given config
 StartSynth () {
     ## Load varibles from given config
-    source "$1"
+    source $1
     
     ## use ALSA to connect MIDI device to MIDI loop
     aconnect $MIDI_DEVICE:0 14:0 &
@@ -56,7 +56,7 @@ StartSynth () {
     then
         ## report error
         echo "ERROR: Failed to start synth!"
-        SaveStatusToFile -1 "ERROR, FAILED TO START" SYNTH_MIDI
+        SaveStatusToFile -1 "ERROR, FAILED TO START" $SYNTH_MIDI
         
         ## kill any potentialy malfuntioning processes...
         pkill -P $SYNTH_PID
@@ -68,7 +68,7 @@ StartSynth () {
     else
         ## join synth to MIDI loopback device, then save status
         aconnect 14:0 $SYNTH_MIDI:0 &
-        SaveStatusToFile SYNTH_PID SYNTH_NAME SYNTH_MIDI
+        SaveStatusToFile $SYNTH_PID $SYNTH_NAME $SYNTH_MIDI
     fi
 }
 
