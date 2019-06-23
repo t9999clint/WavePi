@@ -1,4 +1,7 @@
 #!/bin/bash
+## This script will load a config file according to the number given (000 - 999). If no matching config file is found,
+## it will just load the default config. It will save the result to ../logs/current-synth-info.log
+## This script expects the following syntax... ./startconfig.sh <Config Number>
 
 ## DEFINE GLOBAL VARIBLES ##
 
@@ -7,7 +10,8 @@ CONFIG_REQUEST=$CURRENT_DIR"/../configs/"$1".cfg"
 
 ##Load varibles from main config
 source "$CURRENT_DIR/../configs/main.cfg"
-
+##Read current synth info
+source "$CURRENT_DIR/../logs/current-synth-info.log"
 
 ## DEFINE FUNCTIONS ##
 
@@ -33,7 +37,7 @@ WaitForSynth () {
 
 ## Save's PID and other information to a file
 SaveStatusToFile () {
-
+## THIS WILL BE ADDED LATER ##
 }
 
 ## Start Synth with given config
@@ -41,35 +45,41 @@ StartSynth () {
     ## Load varibles from given config
     source $1
     
-    ## use ALSA to connect MIDI device to MIDI loop
-    aconnect $MIDI_DEVICE:0 14:0 &
-    
-    ## run synth command, get PID for later use.
-    echo "Launching " $SYNTH_NAME " Please wait..."
-    $COMMAND $AUDIO_DEVICE & SYNTH_PID=$!
-    
-    ## wait for synth to load, get midi device number
-    local SYNTH_MIDI=WaitForSynth($SYNTH_SEARCH)
-    
-    ## check if midi actually loaded or not
-    if (( SYNTH_MIDI = -1 ));
+    if (( $1 == RUNNING_CONFIG));
     then
-        ## report error
-        echo "ERROR: Failed to start synth!"
-        SaveStatusToFile -1 "ERROR, FAILED TO START" $SYNTH_MIDI
-        
-        ## kill any potentialy malfuntioning processes...
-        pkill -P $SYNTH_PID
-        ## UGLY HACK, FIX LATER, FOR TESTING ONLY ##
-        killall fluidsynth
-        killall mt32d
-        ## END OF UGLY HACK ##
-        wait 2
+        echo "This config is already running, doing nothing"
     else
-        ## join synth to MIDI loopback device, then save status
-        aconnect 14:0 $SYNTH_MIDI:0 &
-        SaveStatusToFile $SYNTH_PID $SYNTH_NAME $SYNTH_MIDI
+        ## use ALSA to connect MIDI device to MIDI loop
+        aconnect $MIDI_DEVICE:0 14:0 &
+        
+        ## run synth command, get PID for later use.
+        echo "Launching " $SYNTH_NAME " Please wait..."
+        $COMMAND $AUDIO_DEVICE & SYNTH_PID=$!
+        
+        ## wait for synth to load, get midi device number
+        local SYNTH_MIDI=WaitForSynth($SYNTH_SEARCH)
+    
+        ## check if midi actually loaded or not
+        if (( SYNTH_MIDI = -1 ));
+        then
+            ## report error
+            echo "ERROR: Failed to start synth!"
+            SaveStatusToFile -1 "ERROR, FAILED TO START" -1
+            
+            ## kill any potentialy malfuntioning processes...
+            pkill -P $SYNTH_PID
+            ## UGLY HACK, FIX LATER, FOR TESTING ONLY ##
+            killall fluidsynth
+            killall mt32d
+            ## END OF UGLY HACK ##
+            wait 2
+        else
+            ## join synth to MIDI loopback device, then save status
+            aconnect 14:0 $SYNTH_MIDI:0 &
+            SaveStatusToFile $SYNTH_PID $SYNTH_NAME $1
+        fi        
     fi
+    
 }
 
 ## LET'S ACTUALLY START RUNNING STUFF ##
