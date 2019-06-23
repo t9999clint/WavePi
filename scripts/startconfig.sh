@@ -68,7 +68,7 @@ StartSynth () {
     else
         ## join synth to MIDI loopback device, then save status
         aconnect 14:0 $SYNTH_MIDI:0 &
-        SaveStatusToFile SYNTH_PID, SYNTH_NAME, SYNTH_MIDI
+        SaveStatusToFile SYNTH_PID SYNTH_NAME SYNTH_MIDI
     fi
 }
 
