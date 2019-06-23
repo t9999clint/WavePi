@@ -15,13 +15,19 @@ source "$CURRENT_DIR/../logs/current-synth-info.log"
 
 ## DEFINE FUNCTIONS ##
 
+## Saves PID and other information to a file
+SaveStatusToFile () {
+## THIS WILL BE ADDED LATER ##
+echo "saved status debug message, $1, $2, $3"
+}
+
 ## Waits for synth to finish loading and gets its MIDI device number
 WaitForSynth () {
     ## define varibles
     ##echo "debug message, looking for $SYNTH_SEARCH, good luck!"
 
     local LOOP_CYCLE=0
-    local MAX_WAIT=200
+    local MAX_WAIT=1500
     MIDI_NUMBER=0
     
     ## use aconnect to wait for synth's name to show up in the list, then pull the number from it.
@@ -39,10 +45,18 @@ WaitForSynth () {
     done
 }
 
-## Saves PID and other information to a file
-SaveStatusToFile () {
-## THIS WILL BE ADDED LATER ##
-echo "saved status debug message, $1, $2, $3"
+## Stops the current synth running
+StopSynth () {
+    if [ "$RUNNING_PID" != "-1" ]
+    then
+        pkill -P $RUNNING_PID
+    fi
+    ## UGLY HACK for testing ###
+    killall mt32d
+    killall fluidsynth
+    ## END OF UGLY HACK ##
+    SaveStatusToFile -1 "...LOADING PLEASE WAIT..." -1
+    sleep 2
 }
 
 ## Start Synth with given config
@@ -54,6 +68,9 @@ StartSynth () {
     then
         echo "This synth is already running, doing nothing"
     else
+        ## stopping current running config
+        StopSynth
+
         ## use ALSA to connect MIDI device to MIDI loop
         aconnect $MIDI_DEVICE:0 14:0 &
         
@@ -62,16 +79,18 @@ StartSynth () {
         bash $CURRENT_DIR/$COMMAND $AUDIO_DEVICE & SYNTH_PID=$!
         
         ## wait for synth to load, get midi device number
-	    WaitForSynth "$SYNTH_SEARCH"
+	WaitForSynth "$SYNTH_SEARCH"
     
         ## check if midi actually loaded or not
-	    echo "DEBUG MESSAGE >$MIDI_NUMBER<"
-	    if [ "$MIDI_NUMBER" == "0" ]
+	echo "DEBUG MESSAGE >$MIDI_NUMBER<"
+	
+	#SYNTH_MIDI=0        
+	if [ "$MIDI_NUMBER" == "0" ]
         then
             ## report error
             echo "ERROR: Failed to start synth!"
             SaveStatusToFile -1 "ERROR, FAILED TO START" -1
-        
+            
             ## kill any potentialy malfuntioning processes...
             pkill -P $SYNTH_PID &
             ## UGLY HACK, FIX LATER, FOR TESTING ONLY ##
@@ -82,12 +101,12 @@ StartSynth () {
         else
             ## join synth to MIDI loopback device, then save status
             echo "success??"
-	        aconnect 14:0 $MIDI_NUMBER:0 &
-	        ##UGLY HACK, TO FIX MIDI_NUMBER ISSUE##
+	    aconnect 14:0 $MIDI_NUMBER:0 &
+	    ##UGLY HACK, TO FIX MIDI_NUMBER ISSUE##
             aconnect 14:0 128:0 &
             ##END OF UGLY HACK##
             SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
-        fi
+        fi        
     fi
 }
 
