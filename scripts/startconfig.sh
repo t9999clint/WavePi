@@ -56,7 +56,7 @@ StartSynth () {
     then
         ## report error
         echo "ERROR: Failed to start synth!"
-        SaveStatusToFile( -1, "ERROR, FAILED TO START", SYNTH_MIDI )
+        SaveStatusToFile -1 "ERROR, FAILED TO START" SYNTH_MIDI
         
         ## kill any potentialy malfuntioning processes...
         pkill -P $SYNTH_PID
@@ -68,7 +68,7 @@ StartSynth () {
     else
         ## join synth to MIDI loopback device, then save status
         aconnect 14:0 $SYNTH_MIDI:0 &
-        SaveStatusToFile( SYNTH_PID, SYNTH_NAME, SYNTH_MIDI )
+        SaveStatusToFile SYNTH_PID, SYNTH_NAME, SYNTH_MIDI
     fi
 }
 
