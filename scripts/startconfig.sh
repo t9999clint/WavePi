@@ -19,19 +19,21 @@ source "$CURRENT_DIR/../logs/current-synth-info.log"
 WaitForSynth () {
     ## define varibles
     local LOOP_CYCLE=0
-    local MAX_WAIT=1000
+    local MAX_WAIT=2000
     local MIDI_NUMBER=-1
-    while ((LOOP_CYCLE < MAX_WAIT));
-    then
+    
+    ## use aconnect to wait for synth's name to show up in the list, then pull the number from it.
+    while (( $LOOP_CYCLE<$MAX_WAIT ))
+    do
         if (aconnect -o | grep $1 == true)
         then
             LOOP_CYCLE=$MAX_WAIT
             MIDI_NUMBER=$(aconnect -o | grep  -Eo '[0-9]{3}.*$1' | grep -Eo '[0-9]{3}')
         else
-            LOOP_CYCLE=$(LOOP_CYCLE + 1)
+            LOOP_CYCLE=$(( LOOP_CYCLE+1 ))
             wait 0.1
         fi
-    fi
+    done
     return $MIDI_NUMBER
 }
 
@@ -45,9 +47,9 @@ StartSynth () {
     ## Load varibles from given config
     source $1
     
-    if (( $1 == RUNNING_CONFIG));
+    if (( $1==$RUNNING_CONFIG ))
     then
-        echo "This config is already running, doing nothing"
+        echo "This synth is already running, doing nothing"
     else
         ## use ALSA to connect MIDI device to MIDI loop
         aconnect $MIDI_DEVICE:0 14:0 &
@@ -57,20 +59,20 @@ StartSynth () {
         $COMMAND $AUDIO_DEVICE & SYNTH_PID=$!
         
         ## wait for synth to load, get midi device number
-        local SYNTH_MIDI=WaitForSynth($SYNTH_SEARCH)
+        local SYNTH_MIDI=$(WaitForSynth $SYNTH_SEARCH)
     
         ## check if midi actually loaded or not
-        if (( SYNTH_MIDI = -1 ));
+        if (( $SYNTH_MIDI == -1 ))
         then
             ## report error
             echo "ERROR: Failed to start synth!"
             SaveStatusToFile -1 "ERROR, FAILED TO START" -1
             
             ## kill any potentialy malfuntioning processes...
-            pkill -P $SYNTH_PID
+            pkill -P $SYNTH_PID &
             ## UGLY HACK, FIX LATER, FOR TESTING ONLY ##
-            killall fluidsynth
-            killall mt32d
+            killall fluidsynth &
+            killall mt32d &
             ## END OF UGLY HACK ##
             wait 2
         else
@@ -85,7 +87,7 @@ StartSynth () {
 ## LET'S ACTUALLY START RUNNING STUFF ##
 
 ##Check if requested config exists, if not run defailt config instead.
-if [ -f "$CONFIG_REQUEST" ];
+if [ -f $CONFIG_REQUEST ]
 then
     StartSynth $CONFIG_REQUEST
 else
