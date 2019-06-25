@@ -2,6 +2,18 @@
 ## This script is meant to be installed as a service script for systemd (or init.d) to use.
 ## it currently can't pull proper the status from anything but w/e
 
+### BEGIN INIT INFO
+# Provides:          wavepi
+# Required-Start:    $syslog
+# Required-Stop:     
+# Should-Start:      
+# Default-Start:     2 3 4 5
+# Default-Stop:      
+# Short-Description: MIDI Synth frontend script
+# Description:       WavePi runs as a frontend for several MIDI services
+#                    like Fluidsynth and Munt.
+#                    This service helps provide sysex profile switching.
+### END INIT INFO
 
 ## DEFINE VARIBLES ##
 
