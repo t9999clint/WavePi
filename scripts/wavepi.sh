@@ -1,7 +1,7 @@
 #!/bin/bash
 ## This script will load a config file according to the number given (000 - 999). If no matching config file is found,
 ## it will just load the default config. It will save the result to ../logs/current-synth-info.log
-## This script expects the following syntax... ./startconfig.sh <Config Number>
+## This script expects the following syntax... ./wavepi.sh <Config Number>
 
 ## DEFINE GLOBAL VARIBLES ##
 
@@ -80,11 +80,10 @@ StartSynth () {
         
         ## wait for synth to load, get midi device number
 	WaitForSynth "$SYNTH_SEARCH"
-    
+        
         ## check if midi actually loaded or not
 	echo "DEBUG MESSAGE >$MIDI_NUMBER<"
 	
-	#SYNTH_MIDI=0        
 	if [ "$MIDI_NUMBER" == "0" ]
         then
             ## report error
@@ -106,14 +105,20 @@ StartSynth () {
             aconnect 14:0 128:0 &
             ##END OF UGLY HACK##
             SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
-        fi        
+        fi
     fi
 }
 
 ## LETS ACTUALLY START RUNNING STUFF ##
 
-##Check if requested config exists, if not run defailt config instead.
-if [ -f $CONFIG_REQUEST ]
+## If stop is requested, then just stop the running config
+if [ "$1" == "stop" ] || [ "$1" == "STOP" ]
+then
+    StopSynth
+    SaveStatusToFile -1 "Synth has been stopped." -1
+
+## Check if requested config exists, if not run defailt config instead.
+elif [ -f $CONFIG_REQUEST ]
 then
     StartSynth $CONFIG_REQUEST
 else
