@@ -124,5 +124,5 @@ then
 else
     echo "INVALID CONFIG REQUESTED"
     echo "$CONFIG_REQUEST NOT FOUND, LOADING DEFAULTS..."
-    StartSynth $CURRENT_DIR/../configs/$DEFAULT_CONFIG
+    StartSynth $CURRENT_DIR/../configs/$DEFAULT_CONFIG.cfg
 fi
