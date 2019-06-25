@@ -1,4 +1,7 @@
 #!/bin/bash
+## This script is meant to be installed as a service script for systemd (or init.d) to use.
+## it currently can't pull proper the status from anything but w/e
+
 
 ## DEFINE VARIBLES ##
 
