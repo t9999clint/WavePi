@@ -30,7 +30,7 @@ fi
 if [ -f "$1" ]
 then
     ## launch fluiddynth
-    fluidsynth -o synth.cpu-cores=$CPU_LIMIT -o audio.alsa.device=hw:$2 -o audio.period-size=64 -o synth.polyphony=$POLY_LIMIT -R 0 -C 0 -is -r 44100 --gain 0.6 --audio-driver=alsa "$1"
+    fluidsynth -o synth.cpu-cores=$CPU_LIMIT -o audio.alsa.device=hw:$2 -o audio.period-size=64 -o synth.polyphony=$POLY_LIMIT -R 0 -C 0 -is -r 44100 --gain 0.4 --audio-driver=alsa "$1"
 else
     echo "ERROR, SOUNDFONT FILE $1 NOT FOUND!!"
 fi
