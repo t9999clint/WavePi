@@ -28,7 +28,7 @@ The hardware I am developing this project with is as follows…
 
 I will be making a rasbian image for the ras pi 3, but I want to add a few more features first.
 
-###The installation instructions are as follows, keep in mind that the project is in alpha state right now.
+### The installation instructions are as follows, keep in mind that the project is in alpha state right now.
 1. Install debian based os on your synth device. For Raspberry Pi's I strongly recommend raspbian lite (no gui = more ram)
 2. (OPTIONAL) I highly recommend enabling openssh-server so you can remotly manage the files and whatnot using putty and filezilla -- **sudo apt install openssh-server -yy**
 3. (OPTIONAL)update rasbian to latest firmware and whatnot. -- **sudo rpi-update**
