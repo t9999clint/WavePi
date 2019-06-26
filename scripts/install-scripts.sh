@@ -5,6 +5,12 @@
 ## load varibles...
 CURRENT_DIR=$(dirname $(readlink -f $0))
 
+## Installing dependancies
+apt update
+apt install fluidsynth alsa-utils python3 python3-pip librtmidi3
+sudo pip install --update pip
+sudo pip install rtmidi
+
 ## make symlinks...
 ln -s $CURRENT_DIR/wavepi.sh /usr/bin/wavepi
 ln -s $CURRENT_DIR/wavepi-service.sh /etc/init.d/wavepi
