@@ -1,6 +1,6 @@
 #!/bin/bash
-## fluidsynth.sh synth script example
-## This script is meant to be run with the following syntax fluidsynth.sh <sf2 file> <alsa device number>
+## soundfont.sh synth script example
+## This script is meant to be run with the following syntax soundfont.sh <sf2 file> <alsa device number>
 
 ## set of reverb preferences to more closely match soundblaster awe
 fluid_chorus_type=1
