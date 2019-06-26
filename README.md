@@ -1,9 +1,9 @@
 # WavePi
-Multifuntion synth platform for Raspberry Pi and other single board computers.
+## Multifuntion synth platform for Raspberry Pi and other single board computers.
 
-Project page... https://www.retroimperfections.com/wavepi/
+### Project page... https://www.retroimperfections.com/wavepi/
 
-Discussion Forum... https://www.vogons.org/viewtopic.php?f=62&t=65908
+### Discussion Forum... https://www.vogons.org/viewtopic.php?f=62&t=65908
 
 
 WavePi aims to be a Open Source, all in one synth solution for older PCs that lack the grunt to use modern synthesizer software.
@@ -28,42 +28,42 @@ The hardware I am developing this project with is as follows…
 
 I will be making a rasbian image for the ras pi 3, but I want to add a few more features first.
 
-The installation instructions are as follows, keep in mind that the project is in alpha state right now.
+###The installation instructions are as follows, keep in mind that the project is in alpha state right now.
 1. Install debian based os on your synth device. For Raspberry Pi's I strongly recommend raspbian lite (no gui = more ram)
-2. (OPTIONAL) I highly recommend enabling openssh-server so you can remotly manage the files and whatnot using putty and filezilla -- sudo apt install openssh-server -yy
-3. (OPTIONAL)update rasbian to latest firmware and whatnot. -- sudo rpi-update
-4. Update other packages -- sudo apt update && sudo apt upgrade -yy && reboot
-5. configure audio levels -- alsamixer
-6. (optional, but STRONGLY recommended) change default password for pi user. -- passwd
-7. Use wget to download latest WavePi release -- wget <INSERT URL HERE>
-8. use tar to extract the archive -- tar xzf <INSERT FILNAME HERE>
-9. change to WavePi directory -- cd WavePi
-10. open install-munt.sh and enable the appropriate cpu optimizations -- nano install-munt.sh
-11. make it executable -- chmod +x ./install-munt.sh
-12. run install-munt.sh as root to compile and install munt to your system. Go get some coffee this will take a bit. -- sudo install-munt.sh
-13. run the following command to make all the scripts executable. -- chmod +x scripts/*
-14. change to the scripts directory -- cd scripts
-15. run the install-scripts.sh command as root -- sudo install-scripts.sh
+2. (OPTIONAL) I highly recommend enabling openssh-server so you can remotly manage the files and whatnot using putty and filezilla -- **sudo apt install openssh-server -yy**
+3. (OPTIONAL)update rasbian to latest firmware and whatnot. -- **sudo rpi-update**
+4. Update other packages -- **sudo apt update && sudo apt upgrade -yy && reboot**
+5. configure audio levels -- **alsamixer**
+6. (optional, but **_STRONGLY_** recommended) change default password for pi user. -- **passwd**
+7. Use wget to download latest WavePi release -- **wget <INSERT URL HERE>**
+8. use tar to extract the archive -- **tar xzf <INSERT FILNAME HERE>**
+9. change to WavePi directory -- **cd WavePi**
+10. open install-munt.sh and enable the appropriate cpu optimizations -- **nano install-munt.sh**
+11. make it executable -- **chmod +x ./install-munt.sh**
+12. run install-munt.sh as root to compile and install munt to your system. Go get some coffee this will take a bit. -- **sudo install-munt.sh**
+13. run the following command to make all the scripts executable. -- **chmod +x scripts/* **
+14. change to the scripts directory -- **cd scripts**
+15. run the install-scripts.sh command as root -- **sudo install-scripts.sh**
 16. copy over soundfonts and munt rom files to appropriate folders using filezilla or something.
-17. change to the configs subfolder -- cd ../scripts
-18. use aplay to get your alsa device number. -- aplay -l
-19. edit main.cfg file and modify the device numbers to match your hardware -- nano main.cfg
-20. edit the 000.cfg and modify the soundfont settings to match the soundfont you downloaded. -- nano 000.cfg
-21. (optional) create more config files by copying the 000.cfg and configure them for other soundfonts. -- cp 000.cfg 003.cfg
-22. reboot -- sudo reboot
+17. change to the configs subfolder -- **cd ../scripts**
+18. use aplay to get your alsa device number. -- **aplay -l**
+19. edit main.cfg file and modify the device numbers to match your hardware -- **nano main.cfg**
+20. edit the 000.cfg and modify the soundfont settings to match the soundfont you downloaded. -- **nano 000.cfg**
+21. (optional) create more config files by copying the 000.cfg and configure them for other soundfonts. -- **cp 000.cfg 003.cfg**
+22. reboot -- **sudo reboot**
 
 Now there are two ways to control WavePi, either by using the wavepi command, or by sending it special sysex messages.
 
-WavePi command syntax
-wavepi 000
-  By entering in a 3 digit number it will attempt to load a config file matching that number in the sonfigs folder. if no file is found it will attempt to load the default config instead (usually 000.cfg).
-wavepi configfile.cfg
-  By entering a config file, must have .cfg as an extention and contain no spaces in it's filepath/name, wavepi will load that instead of using a numbered config in the config folder.
-wavepi soundfont.sf2
-  By entering a .sf2 file, wavepi will start it up using the soundfont.sh script. (all files cannot contain spaces in it's name or folder path)
-wavepi stop
-  By entering this command, wavepi will check what synth is currently running and stop it using the pkill -P PID command. (please note that the script is smart enough to only allow one synth to run at a time, if you start a synth while one is already running, it'll stop the currently running one first)
+## WavePi command syntax
+- **wavepi 000 :**
+   By entering in a 3 digit number it will attempt to load a config file matching that number in the sonfigs folder. if no file is found it will attempt to load the default config instead (usually 000.cfg).
+- **wavepi configfile.cfg :**
+   By entering a config file, must have .cfg as an extention and contain no spaces in it's filepath/name, wavepi will load that instead of using a numbered config in the config folder.
+- **wavepi soundfont.sf2 :**
+   By entering a .sf2 file, wavepi will start it up using the soundfont.sh script. (all files cannot contain spaces in it's name or folder path)
+- **wavepi stop :**
+   By entering this command, wavepi will check what synth is currently running and stop it using the pkill -P PID command. (please note that the script is smart enough to only allow one synth to run at a time, if you start a synth while one is already running, it'll stop the currently running one first)
   
-WavePi Sysex messages.
-  These messages are using the same format as the ones that Falcosoft MidiPlayer uses. F0 66 04 00 F7 is for config 000, F0 66 04 09 F7 is for config 009 (there is currently a bug that limits this to only 000-009)
-  This can be sent from MS-DOS using this script... https://downloads.kor.ninja/Music/wavepi/sysex.zip
+## WavePi Sysex messages.
+- These messages are using the same format as the ones that Falcosoft MidiPlayer uses. **F0 66 04 00 F7** is for config 000, **F0 66 04 09 F7** is for config 009 (there is currently a bug that limits this to only 000-009)
+- This can be sent from MS-DOS using this script... https://downloads.kor.ninja/Music/wavepi/sysex.zip
