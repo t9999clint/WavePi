@@ -1,7 +1,7 @@
 #!/bin/bash
 ## This script will load a config file according to the number given (000 - 999). If no matching config file is found,
 ## it will just load the default config. It will save the result to ../logs/current-synth-info.log
-## This script expects the following syntax... ./wavepi.sh <Config Number>
+## This script expects the following syntax... ./startconfig.sh <Config Number>
 
 ## DEFINE GLOBAL VARIBLES ##
 
@@ -17,8 +17,9 @@ source "$CURRENT_DIR/../logs/current-synth-info.log"
 
 ## Saves PID and other information to a file
 SaveStatusToFile () {
-## THIS WILL BE ADDED LATER ##
-echo "saved status debug message, $1, $2, $3"
+    SYNTH_LOG="$CURRENT_DIR/../logs/current-synth-info.log"
+    echo -e "RUNNING_PID=$1\nRUNNING_SYNTH_NAME=\"$2\"\nRUNNING_CONFIG=\"$3\"" > $SYNTH_LOG
+    ##echo "saved status debug message, $1, $2, $3"
 }
 
 ## Waits for synth to finish loading and gets its MIDI device number
@@ -62,12 +63,27 @@ StopSynth () {
 ## Start Synth with given config
 StartSynth () {
     ## Load varibles from given config
-    source $1
+    FILE_NAME=$(basename "$1")
+    FILE_EXT="${FILE_NAME##*.}"
+    if [ "$FILE_EXT" == "cfg" ] || [ "$FILE_EXT" == "CFG" ]
+    then
+        source $1
+    elif [ "$FILE_EXT" == "sf2" ] || [ "$FILE_EXT" == "SF2" ]
+    then
+        SYNTH_NAME="${FILE_NAME%.*}"
+        COMMAND="soundfont.sh $1"
+        SYNTH_SEARCH="FLUID"
+    else
+        echo "ERROR: FILE EXTENSION $FILE_EXT NOT SUPPORTED!"
+        ##StartSynth "$CURRENT_DIR/../configs/$DEFAULT_CONFIG.cfg"
+        RUNNING_CONFIG="$1"
+    fi
     
-    if [ $1 = $RUNNING_CONFIG ]
+    if [ "$1" = "$RUNNING_CONFIG" ]
     then
         echo "This synth is already running, doing nothing"
-    else
+   
+   else
         ## stopping current running config
         StopSynth
 
@@ -82,7 +98,7 @@ StartSynth () {
 	WaitForSynth "$SYNTH_SEARCH"
         
         ## check if midi actually loaded or not
-	echo "DEBUG MESSAGE >$MIDI_NUMBER<"
+	echo "DEBUG MESSAGE - MIDI NUMBER>$MIDI_NUMBER<"
 	
 	if [ "$MIDI_NUMBER" == "0" ]
         then
@@ -99,11 +115,11 @@ StartSynth () {
             sleep 2
         else
             ## join synth to MIDI loopback device, then save status
-            echo "success??"
+            ## echo "success??"
 	    aconnect 14:0 $MIDI_NUMBER:0 &
-	    ##UGLY HACK, TO FIX MIDI_NUMBER ISSUE##
+	    ## UGLY HACK, TO FIX MIDI_NUMBER ISSUE##
             aconnect 14:0 128:0 &
-            ##END OF UGLY HACK##
+            ## END OF UGLY HACK##
             SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
         fi
     fi
@@ -117,10 +133,17 @@ then
     StopSynth
     SaveStatusToFile -1 "Synth has been stopped." -1
 
-## Check if requested config exists, if not run defailt config instead.
-elif [ -f $CONFIG_REQUEST ]
+## Check if requested config number exists
+elif [ -f "$CONFIG_REQUEST" ]
 then
-    StartSynth $CONFIG_REQUEST
+    StartSynth "$CONFIG_REQUEST"
+    
+## if direct path to file is given, and above is not valid, run the file
+elif [ -f "$1" ]
+then
+    StartSynth "$1"
+
+## if above is not valid then run defailt config instead.
 else
     echo "INVALID CONFIG REQUESTED"
     echo "$CONFIG_REQUEST NOT FOUND, LOADING DEFAULTS..."
