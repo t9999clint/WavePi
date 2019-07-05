@@ -1,3 +1,3 @@
-#KiCad Files go here.
+# KiCad Files go here.
 
 BOM will go here eventually...
