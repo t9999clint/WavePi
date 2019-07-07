@@ -52,9 +52,9 @@ StopSynth () {
     then
         pkill -P $RUNNING_PID
     fi
-    ## UGLY HACK for testing ###
-    killall mt32d
-    killall fluidsynth
+    ## UGLY HACK for testing (don't think it's needed anymore) ###
+    #killall mt32d
+    #killall fluidsynth
     ## END OF UGLY HACK ##
     SaveStatusToFile -1 "...LOADING PLEASE WAIT..." -1
     sleep 2
@@ -83,7 +83,7 @@ StartSynth () {
     then
         echo "This synth is already running, doing nothing"
    
-   else
+    else
         ## stopping current running config
         StopSynth
 
@@ -107,8 +107,8 @@ StartSynth () {
             SaveStatusToFile -1 "ERROR, FAILED TO START" -1
             
             ## kill any potentialy malfuntioning processes...
-            pkill -P $SYNTH_PID &
-            ## UGLY HACK, FIX LATER, FOR TESTING ONLY ##
+            pkill -P $SYNTH_PID
+            ## UGLY HACK, FIX LATER, FOR TESTING ONLY (probably smart to keep for now)##
             killall fluidsynth &
             killall mt32d &
             ## END OF UGLY HACK ##
@@ -116,9 +116,11 @@ StartSynth () {
         else
             ## join synth to MIDI loopback device, then save status
             ## echo "success??"
-	    aconnect 14:0 $MIDI_NUMBER:0 &
-	    ## UGLY HACK, TO FIX MIDI_NUMBER ISSUE##
+	    aconnect 14:0 $MIDI_NUMBER:0
+	    ## UGLY HACK, UNTIL I FIX MIDI_NUMBER ISSUE##
             aconnect 14:0 128:0 &
+	    aconnect 14:0 129:0 &
+	    aconnect 14:0 130:0 &
             ## END OF UGLY HACK##
             SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
         fi
