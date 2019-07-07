@@ -35,8 +35,9 @@ I will be making a rasbian image for the ras pi 3, but I want to add a few more 
 4. Update other packages -- **sudo apt update && sudo apt upgrade -yy && reboot**
 5. configure audio levels -- **alsamixer**
 6. (optional, but **_STRONGLY_** recommended) change default password for pi user. -- **passwd**
-7. Use wget to download latest WavePi release -- **wget https://github.com/t9999clint/WavePi/releases/download/0.5.0/WavePi-0.5.0.tar.gz**
-8. use tar to extract the archive -- **tar xzf WavePi-0.5.0.tar.gz**
+7. Use wget to download latest WavePi release -- **wget https://github.com/t9999clint/WavePi/archive/v0.6.0.tar.gz**
+8. use tar to extract the archive -- **tar xzf WavePi-0.6.0.tar.gz**
+8b. rename extracted folder to WavePi -- **mv WavePi-0.6.0 WavePi** 
 9. change to WavePi directory -- **cd WavePi**
 10. open install-munt.sh and enable the appropriate cpu optimizations -- **nano install-munt.sh**
 11. make it executable -- **chmod +x ./install-munt.sh**
