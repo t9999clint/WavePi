@@ -54,7 +54,7 @@ start ()
     nice -n $NICE_LEVEL sudo -u $WAVEPI_USER $CURRENT_DIR/wavepi.sh $DEFAULT_CONFIG
 
     ## Start python script to listen for config requests over sysex...
-    sudo -u $WAVEPI_USER $CURRENT_DIR/midi-listen.py 0 &
+    sudo -u $WAVEPI_USER python3 $CURRENT_DIR/midi-listen.py 0 &
 
     ## Check if RGB is enabled and run RGB script if it is...
     if [ "$RGB" == "true" ] || [ "$RGB" == "TRUE" ] || [ "$RGB" == "YES" ] || [ "$RGB" == "yes" ] || [ "$RGB" == "1" ]
