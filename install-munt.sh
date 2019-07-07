@@ -37,7 +37,7 @@
     #export CXXFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
 
 echo "MAKE SURE CPU OPTIMIZATIONS ARE SET BEFORE RUNNING THIS!!!"
-read -p "ALSO THIS SCRIPT MUST BE RUN AS ROOT, PRESS A KEY IF READY!"
+read -p "ALSO THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
 
 ## Setup development enviroment
   apt update
