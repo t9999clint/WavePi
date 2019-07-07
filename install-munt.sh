@@ -37,11 +37,14 @@
     #export CXXFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
 
 echo "MAKE SURE CPU OPTIMIZATIONS ARE SET BEFORE RUNNING THIS!!!"
-pause
+read -p "ALSO THIS SCRIPT MUST BE RUN AS ROOT, PRESS A KEY IF READY!"
 
 ## Setup development enviroment
   apt update
   apt install build-essential cmake libasound-dev libx11-dev libxpm-dev libxt-dev -yy
+  
+## Getting max cores from system
+  CPUCores=$(nproc)
 
 ## Download mt32emu, replace download link with latest version (optional)...
   cd /usr/src
@@ -52,12 +55,12 @@ pause
 ## Compile and install mt32emu
   cd mt32emu
   cmake -DCMAKE_BUILD_TYPE:STRING=Release .
-  make -j 4
+  make -j $CPUCores
   make install
   cd ..
 
 ## Compile and install mt32emu alsa driver
   cd mt32emu_alsadrv
-  make -j 4
+  make -j $CPUCores
   make install
   cd ..
