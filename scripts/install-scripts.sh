@@ -39,6 +39,11 @@ ln -s $CURRENT_DIR/wavepi.sh /usr/bin/wavepi
 ln -s $CURRENT_DIR/wavepi-service.sh /etc/init.d/wavepi
 ln -s $CURRENT_DIR/wavepi-service.config /etc/init/wavepi.conf
 
+## Downloading Soundfont
+cd soundfonts
+wget https://downloads.kor.ninja/Music/wavepi/PRO7USE.sf2
+cd ..
+
 ## register service to debian
 update-rc.d wavepi defaults
 
