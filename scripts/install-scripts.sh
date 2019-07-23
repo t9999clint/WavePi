@@ -15,7 +15,7 @@ apt install python3-setuptools -yy
 apt install jackd2 libjack-jackd2-dev -yy
 apt install libjack-jackd2-0 -yy
 
-sudo pip3 install --update pip
+sudo pip3 install --upgrade pip
 sudo pip3 install cython
 sudo pip3 install rtmidi
 sudo pip3 install python-rtmidi
