@@ -9,7 +9,7 @@
 # Should-Start:      
 # Default-Start:     2 3 4 5
 # Default-Stop:      
-# Short-Description: MIDI Synth frontend script
+# Short-Description: WavePI - MIDI Synth frontend script
 # Description:       WavePi runs as a frontend for several MIDI services
 #                    like Fluidsynth and Munt.
 #                    This service helps provide sysex profile switching.
@@ -54,19 +54,33 @@ start ()
     nice -n $NICE_LEVEL sudo -u $WAVEPI_USER $CURRENT_DIR/wavepi.sh $DEFAULT_CONFIG
 
     ## Start python script to listen for config requests over sysex...
-    sudo -u $WAVEPI_USER python3 $CURRENT_DIR/midi-listen.py 0 &
+    nice -n $NICE_LEVEL sudo -u $WAVEPI_USER python3 $CURRENT_DIR/midi-listen.py 0 &
 
     ## Check if RGB is enabled and run RGB script if it is...
     if [ "$RGB" == "true" ] || [ "$RGB" == "TRUE" ] || [ "$RGB" == "YES" ] || [ "$RGB" == "yes" ] || [ "$RGB" == "1" ]
     then
         sudo -u $WAVEPI_USER $CURRENT_DIR/midirgb.sh &
     fi
+    
+    ## Check if Serial is enabled and run the Serial Midi script as root if it is...
+    if [ "$SERIAL_ENABLE" == "true" ] || [ "$SERIAL_ENABLE" == "TRUE" ] || [ "$SERIAL_ENABLE" == "YES" ] || [ "$SERIAL_ENABLE" == "yes" ] || [ "$SERIAL_ENABLE" == "1" ]
+    then
+        $CURRENT_DIR/serial-midi.sh $SERIAL_DEVICE &
+        ##UGLY HACK until I implement a better way of doing this
+        aconnect 128:0 14:0
+        aconnect 129:0 14:0
+        ##END OF UGLY HACK
+    fi
 }
 
 stop ()
 {
     sudo -u $WAVEPI_USER $CURRENT_DIR/wavepi.sh stop
-
+    
+    ##UGLY HACK for TTYMIDI support
+    killall ttymidi
+    ##END OF UGLY HACK
+    
     ## other stop scripts for other stuff...
 }
 
