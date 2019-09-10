@@ -18,7 +18,7 @@ source "$CURRENT_DIR/../logs/current-synth-info.log"
 ## Saves PID and other information to a file
 SaveStatusToFile () {
     SYNTH_LOG="$CURRENT_DIR/../logs/current-synth-info.log"
-    echo -e "RUNNING_PID=$1\nRUNNING_SYNTH_NAME=\"$2\"\nRUNNING_CONFIG=\"$3\"" > $SYNTH_LOG
+    echo -e "RUNNING_PID=$1\nRUNNING_SYNTH_NAME=\"$2\"\nRUNNING_CONFIG=\"$3\"\nRUNNING_LCD_NAME=\"$4\"" > $SYNTH_LOG
     ##echo "saved status debug message, $1, $2, $3"
 }
 
@@ -122,7 +122,7 @@ StartSynth () {
 	    aconnect 14:0 129:0 &
 	    aconnect 14:0 130:0 &
             ## END OF UGLY HACK##
-            SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
+            SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1" "$SYNTH_LCD_NAME"
         fi
     fi
 }
