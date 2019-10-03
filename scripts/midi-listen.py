@@ -45,6 +45,10 @@ class LcdHandler(Thread):
         empty_row = ' ' * self.cols
         self.lcd.cursor_pos = (row,0)
         self.lcd.write_string(empty_row)
+        string = string.lstrip(' ') #trim the spaces because we center the string ourselves
+        string = string.rstrip(' ')
+        if (len(string) > self.cols):
+            string = string[0:self.cols]
         col = int((self.cols - len(string)) / 2)
         if col < 0:
             col = 0
