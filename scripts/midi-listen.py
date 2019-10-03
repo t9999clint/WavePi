@@ -26,6 +26,7 @@ class LcdHandler(Thread):
         self.state_channels = [False, False, False, False, False, False, False, False, False, False]
         self.lcd_states = ["config","channels"]
         self.lcd_blocked = False
+        self.current_synth_name = 0
         self.start()
 
     def get_active_synth_name(self):
@@ -35,7 +36,10 @@ class LcdHandler(Thread):
                 content = f.readline()
             content = content.replace('"','')
             content = content.strip()
-            return content.split('=')[1]
+            if "PLEASE WAIT" not in content.split('=')[1]:
+                return content.split('=')[1]
+            else:
+                return self.current_synth_name
 
     def write_center(self, row, string):
         empty_row = ' ' * self.cols
@@ -89,14 +93,18 @@ class LcdHandler(Thread):
 
     def run(self):
         self.write_center(0, "WavePi")
-        self.write_center(1, self.get_active_synth_name())
+        self.current_synth_name = self.get_active_synth_name()
+        self.write_center(1, self.current_synth_name)
         sleep(2)
         self.init_channels()
         while True:
             sleep(1)
             if self.lcd_states[0] == 'sysex_lcd':
                 sleep(3)
-                self.write_first_line(self.get_active_synth_name(), 'config')
+                self.write_first_line(self.current_synth_name, 'config')
+            elif self.current_synth_name != self.get_active_synth_name():
+                self.current_synth_name = self.get_active_synth_name()
+                self.write_first_line(self.current_synth_name, 'config')
 
 
 class MidiInputHandler(object):
@@ -111,23 +119,20 @@ class MidiInputHandler(object):
                 if msg.data[4:7] == (0x20, 0x00, 0x00):     # Display message
                     LCD_message = ''.join(chr(i) for i in msg.data[7:-2])
                     lcd.write_first_line(LCD_message.rstrip(),"sysex_lcd")
-            print(msg.data)
+
+            elif msg.data[0:2] == (0x66, 0x04):             # WavePi profile change SysEx message
+                os.system('wavepi 00' + str(msg.data[-1]))
         elif msg.type == 'control_change':
             if msg.control == 123:
                 self.lcd.turn_channel_off(msg.channel)
-            #print(msg)
         elif msg.type == 'program_change':
-            print(msg)
+            # do something???
+            pass
         elif self.lcd:
             if msg.type == 'note_on':
                 self.lcd.turn_channel_on(msg.channel)
             elif msg.type == 'note_off':
                 self.lcd.turn_channel_off(msg.channel)
-
-        #Handle SysEx message for changing configuration
-        #if message[0] == 240 and message[1] == 102 and message[2] == 4 and message[4] == 247:
-        #    print("request detected, change to config number", str(message[3]))
-        #    os.system('wavepi 00' + str(message[3]))
 
 # read config file
 with open(os.path.dirname(os.path.abspath(__file__)) + '/../configs/main.cfg') as f:
