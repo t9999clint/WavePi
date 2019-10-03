@@ -31,7 +31,7 @@ class LcdHandler(Thread):
     def get_active_synth_name(self):
         with open(os.path.dirname(os.path.abspath(__file__)) + '/../logs/current-synth-info.log') as f:
             content = f.readline()
-            while "RUNNING_LCD_NAME" not in content:
+            while "RUNNING_SYNTH_NAME" not in content:
                 content = f.readline()
             content = content.replace('"','')
             content = content.strip()
