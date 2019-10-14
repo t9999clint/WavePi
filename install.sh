@@ -98,32 +98,39 @@ fi
 read -p "THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
 
 ## Setup development enviroment
-  apt update
-  apt install build-essential cmake libasound-dev libx11-dev libxpm-dev libxt-dev -yy
+  sudo apt update
+  sudo apt install build-essential cmake libasound-dev libx11-dev libxpm-dev libxt-dev -yy
   
-## Getting max cores from system
+## load varibles...
+  CURRENT_DIR=$(dirname $(readlink -f $0))
   CPUCores=$(nproc)
+  
 
 ## Download mt32emu, replace download link with latest version (optional)...
   cd /usr/src
-  wget https://github.com/munt/munt/archive/munt_2_3_0.tar.gz
-  tar xzf munt_2_3_0.tar.gz
+  sudo wget https://github.com/munt/munt/archive/munt_2_3_0.tar.gz
+  sudo tar xzf munt_2_3_0.tar.gz
   cd munt-munt_2_3_0
 
 ## Compile and install mt32emu
   cd mt32emu
-  cmake -DCMAKE_BUILD_TYPE:STRING=Release .
-  make -j $CPUCores
-  make install
+  sudo cmake -DCMAKE_BUILD_TYPE:STRING=Release .
+  sudo make -j $CPUCores
+  sudo make install
   cd ..
 
 ## Compile and install mt32emu alsa driver
   cd mt32emu_alsadrv
-  make -j $CPUCores
-  make install
+  sudo make -j $CPUCores
+  sudo make install
   cd ..
+  
+##Clean up munt compile
+  cd ..
+  rm -R ./munt-munt_2_3_0
+  cd $CURRENT_DIR
   
 ## Install WavePi service
   cd scripts
-  source ./install-wavepi.sh
+  sudo bash ./install-wavepi.sh
   cd ..
