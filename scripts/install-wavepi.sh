@@ -21,13 +21,12 @@ sudo pip3 install rtmidi
 sudo pip3 install python-rtmidi
 
 ## Compile and install ttymidi
-wget https://github.com/sbelectronics/ttymidi/archive/master.zip
-unzip master.zip
-cd ttymidi-master/
+git clone https://github.com/ElBartoME/ttymidi/
+cd ttymidi/
 make
 sudo make install
 cd ..
-rm -R ttymidi-master/
+rm -R ttymidi/
 
 ## Compile and install rtmidi
 #wget https://github.com/SpotlightKid/python-rtmidi/archive/1.3.0.tar.gz

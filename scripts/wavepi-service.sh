@@ -67,8 +67,10 @@ start ()
     then
         $CURRENT_DIR/serial-midi.sh $SERIAL_DEVICE &
         ##UGLY HACK until I implement a better way of doing this
-        aconnect 128:0 14:0
-        aconnect 129:0 14:0
+        #aconnect 128:0 14:0
+        #aconnect 129:0 14:0
+	sleep 1
+	aconnect 'ttymidi':0 'Midi Through':0
         ##END OF UGLY HACK
     fi
 }
