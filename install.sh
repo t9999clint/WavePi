@@ -126,3 +126,4 @@ read -p "THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
 ## Install WavePi service
   cd scripts
   source ./install-wavepi.sh
+  cd ..
