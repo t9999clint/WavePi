@@ -1,5 +1,5 @@
-##/bin/bash
-CCFLAGS="AUTO"
+#!/bin/bash
+export CCFLAGS="AUTO"
 
 ###### BIG SCARY WARNING ######
 ### RUN AS ROOT, AND EDIT THE COMPLIATION OPTIMIZATIONS TO MATCH YOUR OWN PLATFORM BEFORE CONTINUING!!! ###
@@ -8,98 +8,99 @@ CCFLAGS="AUTO"
 ## These optimizations are from... https://retropie.org.uk/forum/topic/12549/tutorial-installing-munt-mt-32-emulation-on-rpi-3
 
   ## Raspberry Pi 4 
-    #CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 
   ## Raspberry Pi 3
-    #CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 
   ## Raspberry Pi 2
-    #CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 
   ## Raspberry Pi 1/Zero (not sure whether Munt will be usable on these boards):
-    #CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
-    #CXXFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
+    #export CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
+    #export CXXFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
 
   ## ODROID-C2:
-    #CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -ftree-vectorize -funsafe-math-optimizations"
 
   ## ODROID-C1:
-    #CCFLAGS="-Ofast -mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 
   ## ODROID-XU:
-    #CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations -DGL_GLEXT_PROTOTYPES"
-    #CXXFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations -DGL_GLEXT_PROTOTYPES"
+    #export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations -DGL_GLEXT_PROTOTYPES"
+    #export CXXFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations -DGL_GLEXT_PROTOTYPES"
 
   ## Freescale i.MX6 Quad/DualLite:
-    #CCFLAGS="-Ofast -march=armv7-a -mfpu=neon -mtune=cortex-a9 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -march=armv7-a -mfpu=neon -mtune=cortex-a9 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv7-a -mfpu=neon -mtune=cortex-a9 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -march=armv7-a -mfpu=neon -mtune=cortex-a9 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
 
   ## x86/other/unknown:
-    #CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
-    #CXXFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
+    #export CXXFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
 
 #check if ccflags have been manually set and auto detect hardware if it wasn't.
 if [ CCFLAGS=="AUTO" ]
 then
     
     ##Try and pull RasPi version from cpuinfo
-    PI_ID=(cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//')
+    PI_ID=$(cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//')
     PI_VERSION="none"
     
     #categorize PI_ID into categories
-    if [ PI_ID == "Beta" ] || [ PI_ID == "0002" ] || [ PI_ID == "0003" ] || [ PI_ID == "0004" ] || [ PI_ID == "0005" ] || [ PI_ID == "0006" ] || [ PI_ID == "0007" ] || [ PI_ID == "0008" ] || [ PI_ID == "0009" ] || [ PI_ID == "000d" ] || [ PI_ID == "000e" ] || [ PI_ID == "000f" ] || [ PI_ID == "0010" ] || [ PI_ID == "0011" ] || [ PI_ID == "0012" ] || [ PI_ID == "0013" ] || [ PI_ID == "0014" ] || [ PI_ID == "0015" ] || [ PI_ID == "900021" ] || [ PI_ID == "900032" ] || [ PI_ID == "900092" ] || [ PI_ID == "900093" ] || [ PI_ID == "9000c1" ] || [ PI_ID == "a020a0" ] || [ PI_ID == "a02100" ]
+    if [ "$PI_ID" == "Beta" ] || [ "$PI_ID" == "0002" ] || [ "$PI_ID" == "0003" ] || [ "$PI_ID" == "0004" ] || [ "$PI_ID" == "0005" ] || [ "$PI_ID" == "0006" ] || [ "$PI_ID" == "0007" ] || [ "$PI_ID" == "0008" ] || [ "$PI_ID" == "0009" ] || [ "$PI_ID" == "000d" ] || [ "$PI_ID" == "000e" ] || [ "$PI_ID" == "000f" ] || [ "$PI_ID" == "0010" ] || [ "$PI_ID" == "0011" ] || [ "$PI_ID" == "0012" ] || [ "$PI_ID" == "0013" ] || [ "$PI_ID" == "0014" ] || [ "$PI_ID" == "0015" ] || [ "$PI_ID" == "900021" ] || [ "$PI_ID" == "900032" ] || [ "$PI_ID" == "900092" ] || [ "$PI_ID" == "900093" ] || [ "$PI_ID" == "9000c1" ] || [ "$PI_ID" == "a020a0" ] || [ "$PI_ID" == "a02100" ] || [ "$PI_ID" == "2Beta" ] || [ "$PI_ID" == "20002" ] || [ "$PI_ID" == "20003" ] || [ "$PI_ID" == "20004" ] || [ "$PI_ID" == "20005" ] || [ "$PI_ID" == "20006" ] || [ "$PI_ID" == "20007" ] || [ "$PI_ID" == "20008" ] || [ "$PI_ID" == "20009" ] || [ "$PI_ID" == "2000d" ] || [ "$PI_ID" == "2000e" ] || [ "$PI_ID" == "2000f" ] || [ "$PI_ID" == "20010" ] || [ "$PI_ID" == "20011" ] || [ "$PI_ID" == "20012" ] || [ "$PI_ID" == "20013" ] || [ "$PI_ID" == "20014" ] || [ "$PI_ID" == "20015" ] || [ "$PI_ID" == "2900021" ] || [ "$PI_ID" == "2900032" ] || [ "$PI_ID" == "2900092" ] || [ "$PI_ID" == "2900093" ] || [ "$PI_ID" == "29000c1" ] || [ "$PI_ID" == "2a020a0" ] || [ "$PI_ID" == "2a02100" ]
     then
         PI_VERSION="1"
-    elif [ PI_ID == "a01040" ] || [ PI_ID == "a01041" ] || [ PI_ID == "a01042" ] || [ PI_ID == "a01041" ]
+    elif [ "$PI_ID" == "a01040" ] || [ "$PI_ID" == "a01041" ] || [ "$PI_ID" == "a01042" ] || [ "$PI_ID" == "a01041" ] || [ "$PI_ID" == "2a01040" ] || [ "$PI_ID" == "2a01041" ] || [ "$PI_ID" == "2a01042" ] || [ "$PI_ID" == "2a01041" ]
     then
         PI_VERSION="2"
-    elif [ PI_ID == "a02082" ] || [ PI_ID == "a22082" ] || [ PI_ID == "a32082" ] || [ PI_ID == "a020d3" ] || [ PI_ID == "9020e0" ]
+    elif [ "$PI_ID" == "a02082" ] || [ "$PI_ID" == "a22082" ] || [ "$PI_ID" == "a32082" ] || [ "$PI_ID" == "a020d3" ] || [ "$PI_ID" == "9020e0" ] || [ "$PI_ID" == "2a02082" ] || [ "$PI_ID" == "2a22082" ] || [ "$PI_ID" == "2a32082" ] || [ "$PI_ID" == "2a020d3" ] || [ "$PI_ID" == "29020e0" ]
     then
         PI_VERSION="3"
-    elif [ PI_ID == "a03111" ] || [ PI_ID == "b03111" ] || [ PI_ID == "c03111" ]
+    elif [ "$PI_ID" == "a03111" ] || [ "$PI_ID" == "b03111" ] || [ "$PI_ID" == "c03111" ] || [ "$PI_ID" == "2a03111" ] || [ "$PI_ID" == "2b03111" ] || [ "$PI_ID" == "2c03111" ]
     then
-        PI_VERSION='4'
+        PI_VERSION="4"
     fi
     
     #if Pi is detected, load appropriate optimizations.
-    if [ PI_VERSION=="1" ]
+    if [ "$PI_VERSION" == "1" ]
     then
         echo "Raspberry PI 1/zero Detected!"
-        CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
-        CXXFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
-    elif [ PI_VERSION=="2" ]
+        export CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
+        export CXXFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
+    elif [ "$PI_VERSION" == "2" ]
     then
         echo "Raspberry PI 2 Detected!"
-        CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-        CXXFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    elif [ PI_VERSION=="3" ]
+        export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+        export CXXFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    elif [ "$PI_VERSION" == "3" ]
     then
         echo "Raspberry PI 3 Detected!"
-        CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-        CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-    elif [ PI_VERSION=="4" ]
+        export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+        export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    elif [ "$PI_VERSION" == "4" ]
     then
         echo "Raspberry PI 4 Detected!"
-        CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
-        CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+        export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+        export CXXFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     else
         echo "!!Unable to detect hardware, using safe defaults!!"
-        CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
-        CXXFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
+        read -p "PRESS ENTER KEY IF OK, CTRL-C to quit"
+        export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
+        export CXXFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
     fi
-
+else
+read -p "Manual config detected, PRESS ENTER KEY IF READY, CTRL-C to quit!"
 fi
-
-read -p "THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
 
 ## Setup development enviroment
   sudo apt update
   sudo apt install build-essential cmake libasound-dev libx11-dev libxpm-dev libxt-dev -yy
+  sudo usermod -a -G audio $USER
   
 ## load varibles...
   CURRENT_DIR=$(dirname $(readlink -f $0))
@@ -127,7 +128,8 @@ read -p "THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
   
 ##Clean up munt compile
   cd ..
-  rm -R ./munt-munt_2_3_0
+  sudo rm -R ./munt-munt_2_3_0
+  sudo rm munt_2_3_0.tar.gz
   cd $CURRENT_DIR
   
 ## Install WavePi service
