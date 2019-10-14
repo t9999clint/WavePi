@@ -131,6 +131,7 @@ read -p "THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
   cd $CURRENT_DIR
   
 ## Install WavePi service
+  sudo chmod +x ./scripts/*
   cd scripts
   sudo bash ./install-wavepi.sh
   cd ..
