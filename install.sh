@@ -122,3 +122,7 @@ read -p "THIS SCRIPT MUST BE RUN AS ROOT, PRESS ENTER KEY IF READY!"
   make -j $CPUCores
   make install
   cd ..
+  
+## Install WavePi service
+  cd scripts
+  source ./install-wavepi.sh
