@@ -101,6 +101,7 @@ fi
   sudo apt update
   sudo apt install build-essential cmake libasound-dev libx11-dev libxpm-dev libxt-dev -yy
   sudo usermod -a -G audio $USER
+  sudo usermod -a -G i2c $USER
   
 ## load varibles...
   CURRENT_DIR=$(dirname $(readlink -f $0))
