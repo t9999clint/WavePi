@@ -86,7 +86,7 @@ AUTO_SETUP_AUTOSTART_TARGET_INDEX=0
 # Autologin user name
 # - This user must exist before firstrun installs, otherwise it will be reverted to root.
 # - Applies to all autostart options but: 0, 6, 14 and 16
-AUTO_SETUP_AUTOSTART_LOGIN_USER=root
+AUTO_SETUP_AUTOSTART_LOGIN_USER=dietpi
 
 ##### Non-interactive Firstrun Setup #####
 # On first login, run update, initial setup and software installs without any user input
@@ -97,7 +97,7 @@ AUTO_SETUP_AUTOMATED=1
 # Global Password to be applied for the system
 # - Affects user "root" and "dietpi" login passwords, and, all software installed by dietpi-software, that requires a login password
 # - WARN: Passwords with any of the following characters are not supported: \"$
-AUTO_SETUP_GLOBAL_PASSWORD=changeme
+AUTO_SETUP_GLOBAL_PASSWORD=wavepi
 
 # Software to automatically install
 # - List of available software IDs: https://github.com/MichaIng/DietPi/wiki/DietPi-Software-list
@@ -107,6 +107,12 @@ AUTO_SETUP_GLOBAL_PASSWORD=changeme
 #AUTO_SETUP_INSTALL_SOFTWARE_ID=23    # will install LXDE desktop
 #AUTO_SETUP_INSTALL_SOFTWARE_ID=74    # will install LAMP webserver stack
 #AUTO_SETUP_INSTALL_SOFTWARE_ID=44    # will install Transmission Bittorrent downloader
+AUTO_SETUP_INSTALL_SOFTWARE_ID=5
+AUTO_SETUP_INSTALL_SOFTWARE_ID=16
+AUTO_SETUP_INSTALL_SOFTWARE_ID=72
+AUTO_SETUP_INSTALL_SOFTWARE_ID=70
+AUTO_SETUP_INSTALL_SOFTWARE_ID=94
+
 
 #------------------------------------------------------------------------------------------------------
 # D I E T - P I
