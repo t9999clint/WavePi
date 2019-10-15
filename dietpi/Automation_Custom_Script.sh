@@ -5,10 +5,10 @@ sudo apt-get install wget -y
 sudo apt-get install nano -y
 sudo apt-get install tar -y
 
-wget wavepiurl
 cd \home\dietpi
+wget https://github.com/t9999clint/WavePi/archive/v0.8.0.tar.gz
 tar -xzf WavePi-WavePi.tar.gz
-mv WavePi-WavePi WavePi
+mv WavePi-0.8.0 WavePi
 cd WavePi
 chmod +x ./install.sh
 ./install.sh
