@@ -28,30 +28,27 @@ The hardware I am developing this project with is as follows…
 
 I will be making a rasbian image for the ras pi 3, but I want to add a few more features first.
 
-### The installation instructions are as follows, keep in mind that the project is in alpha state right now.
+### The installation instructions are as follows, keep in mind that the project is in beta state right now.
 1. Install debian based os on your synth device. For Raspberry Pi's I strongly recommend raspbian lite (no gui = more ram)
 2. (OPTIONAL) I highly recommend enabling openssh-server so you can remotly manage the files and whatnot using putty and filezilla -- **sudo apt install openssh-server -yy && sudo systemctl enable ssh**
 3. (OPTIONAL)update rasbian to latest firmware and whatnot. -- **sudo rpi-update**
 4. Update other packages -- **sudo apt update && sudo apt upgrade -yy && reboot**
 5. configure audio levels -- **alsamixer**
 6. (optional, but **_STRONGLY_** recommended) change default password for pi user. -- **passwd**
-7. Use wget to download latest WavePi release -- **wget https://github.com/t9999clint/WavePi/archive/v0.6.0.tar.gz**
-8. use tar to extract the archive -- **tar xzf v0.6.0.tar.gz**
-9. rename extracted folder to WavePi -- **mv WavePi-0.6.0 WavePi** 
+7. Use wget to download latest WavePi release -- **wget https://github.com/t9999clint/WavePi/archive/v0.8.0.tar.gz**
+8. use tar to extract the archive -- **tar xzf v0.8.0.tar.gz**
+9. rename extracted folder to WavePi -- **mv WavePi-0.8.0 WavePi** 
 10. change to WavePi directory -- **cd WavePi**
-11. open install-munt.sh and enable the appropriate cpu optimizations -- **nano install-munt.sh**
-12. make it executable -- **chmod +x ./install-munt.sh**
-13. run install-munt.sh as root to compile and install munt to your system. Go get some coffee this will take a bit. -- **sudo ./install-munt.sh**
-14. run the following command to make all the scripts executable. -- **chmod +x scripts/***
-15. change to the scripts directory -- **cd scripts**
-16. run the install-scripts.sh command as root -- **sudo ./install-scripts.sh**
-17. copy over soundfonts and munt rom files to appropriate folders using filezilla or something.
-18. change to the configs subfolder -- **cd ../configs**
-19. use aplay to get your alsa device number. -- **aplay -l**
-20. edit main.cfg file and modify the device numbers to match your hardware -- **nano main.cfg**
-21. edit the 000.cfg and modify the soundfont settings to match the soundfont you downloaded. -- **nano 000.cfg**
-22. (optional) create more config files by copying the 000.cfg and configure them for other soundfonts. -- **cp 000.cfg 003.cfg**
-23. reboot -- **sudo reboot**
+11. open install-munt.sh and enable the appropriate cpu optimizations -- **nano install.sh**
+12. make it executable -- **chmod +x ./install.sh**
+13. run install-munt.sh as root to compile and install munt to your system. Go get some coffee this will take a bit. -- **sudo ./install.sh**
+14. copy over soundfonts and munt rom files to appropriate folders using filezilla or something.
+15. change to the configs subfolder -- **cd ../configs**
+16. use aplay to get your alsa device number. -- **aplay -l**
+17. edit main.cfg file and modify the device numbers to match your hardware -- **nano main.cfg**
+18. edit the 000.cfg and modify the soundfont settings to match the soundfont you downloaded. -- **nano 000.cfg**
+19. (optional) create more config files by copying the 000.cfg and configure them for other soundfonts. -- **cp 000.cfg 003.cfg**
+20. reboot -- **sudo reboot**
 
 Now there are two ways to control WavePi, either by using the wavepi command, or by sending it special sysex messages.
 
