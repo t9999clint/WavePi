@@ -19,6 +19,9 @@ sudo pip3 install --upgrade pip
 sudo pip3 install cython
 sudo pip3 install rtmidi
 sudo pip3 install python-rtmidi
+sudo pip3 install mido
+sudo pip3 install RPLCD
+sudo pip3 install smbus
 
 ## Compile and install ttymidi
 git clone https://github.com/ElBartoME/ttymidi/
