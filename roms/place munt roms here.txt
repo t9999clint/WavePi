@@ -1,1 +1,7 @@
- 
+Place Roland MT-32 and CM-32 ROMS here!
+
+They must be named in the following fasion in order to be recognized!
+MT32_CONTROL.ROM
+MT32_PCM.ROM
+CM32L_CONTROL.ROM
+CM32L_PCM.ROM
