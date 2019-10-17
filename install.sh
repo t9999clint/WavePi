@@ -132,3 +132,6 @@ export CXXFLAGS="$CCFLAGS"
   cd scripts
   sudo bash ./install-wavepi.sh
   cd ..
+
+##debug step, to be removed at later date...
+echo "$CXXFLAGS"
