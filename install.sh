@@ -9,31 +9,31 @@ CCFLAGS="AUTO"
 ## These optimizations are from... https://retropie.org.uk/forum/topic/12549/tutorial-installing-munt-mt-32-emulation-on-rpi-3
 
   ## Raspberry Pi 4 
-    #sudo export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     
   ## Raspberry Pi 3
-    #sudo export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     
   ## Raspberry Pi 2
-    #sudo export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     
   ## Raspberry Pi 1/Zero (not sure whether Munt will be usable on these boards):
-    #sudo export CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
+    #export CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
     
   ## ODROID-C2:
-    #sudo export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -ftree-vectorize -funsafe-math-optimizations"
     
   ## ODROID-C1:
-    #sudo export CCFLAGS="-Ofast -mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -mcpu=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     
   ## ODROID-XU:
-    #sudo export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations -DGL_GLEXT_PROTOTYPES"
+    #export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations -DGL_GLEXT_PROTOTYPES"
     
   ## Freescale i.MX6 Quad/DualLite:
-    #sudo export CCFLAGS="-Ofast -march=armv7-a -mfpu=neon -mtune=cortex-a9 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=armv7-a -mfpu=neon -mtune=cortex-a9 -mfloat-abi=hard -ftree-vectorize -funsafe-math-optimizations"
     
   ## x86/other/unknown:
-    #sudo export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
+    #export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
     
 #check if ccflags have been manually set and auto detect hardware if it wasn't.
 if [ CCFLAGS=="AUTO" ]
@@ -62,25 +62,25 @@ then
     if [ "$PI_VERSION" == "1" ]
     then
         echo "Raspberry PI 1/zero Detected!"
-        sudo export CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
+        export CCFLAGS="-Ofast -mfpu=vfp -march=armv6j -mfloat-abi=hard"
     elif [ "$PI_VERSION" == "2" ]
     then
         echo "Raspberry PI 2 Detected!"
-        sudo export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -mvectorize-with-neon-quad -ftree-vectorize -funsafe-math-optimizations"
+        export CCFLAGS="-Ofast -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -mvectorize-with-neon-quad -ftree-vectorize -funsafe-math-optimizations"
     elif [ "$PI_VERSION" == "3" ]
     then
         echo "Raspberry PI 3 Detected!"
-        sudo export CCFLAGS="-Ofast -mcpu=cortex-a53 -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -mvectorize-with-neon-quad -ftree-vectorize -funsafe-math-optimizations"
+        export CCFLAGS="-Ofast -mcpu=cortex-a53 -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -mvectorize-with-neon-quad -ftree-vectorize -funsafe-math-optimizations"
     elif [ "$PI_VERSION" == "4" ]
     then
         echo "Raspberry PI 4 Detected!"
-        sudo export CCFLAGS="-Ofast -mcpu=cortex-a72 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -mvectorize-with-neon-quad -ftree-vectorize -funsafe-math-optimizations"
+        export CCFLAGS="-Ofast -mcpu=cortex-a72 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -mvectorize-with-neon-quad -ftree-vectorize -funsafe-math-optimizations"
     
     ##If archetecture cannot be detected, and no manual setting was chosen, then it will alert the user and use safe optimizations.
     else
         echo "!!Unable to detect hardware, using safe defaults!!"
         read -p "PRESS ENTER KEY IF OK, CTRL-C to quit"
-        sudo export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
+        export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
     fi
 
 ##Alert user that manual settings were chosen, and display what they are.
@@ -90,7 +90,7 @@ read -p "Manual config detected, PRESS ENTER KEY IF READY, CTRL-C to quit!"
 fi
 
 ##Make CCX match CC
-sudo export CXXFLAGS="$CCFLAGS"
+export CXXFLAGS="$CCFLAGS"
 
 ## Setup development enviroment
   sudo apt update
@@ -104,32 +104,31 @@ sudo export CXXFLAGS="$CCFLAGS"
   
 
 ## Download mt32emu, replace download link with latest version (optional)...
-  cd /usr/src
-  sudo wget https://github.com/munt/munt/archive/munt_2_3_0.tar.gz
-  sudo tar xzf munt_2_3_0.tar.gz
+  mkdir tmp
+  cd tmp
+  wget https://github.com/munt/munt/archive/munt_2_3_0.tar.gz
+  tar xzf munt_2_3_0.tar.gz
   cd munt-munt_2_3_0
 
 ## Compile and install mt32emu
   cd mt32emu
-  sudo cmake -DCMAKE_BUILD_TYPE:STRING=Release .
-  sudo make -j $CPUCores
+  cmake -DCMAKE_BUILD_TYPE:STRING=Release .
+  make -j $CPUCores
   sudo make install
   cd ..
 
 ## Compile and install mt32emu alsa driver
   cd mt32emu_alsadrv
-  sudo make -j $CPUCores
+  make -j $CPUCores
   sudo make install
   cd ..
   
 ##Clean up munt compile
-  cd ..
-  sudo rm -R ./munt-munt_2_3_0
-  sudo rm munt_2_3_0.tar.gz
   cd $CURRENT_DIR
+  sudo rm -R ./mt32
   
 ## Install WavePi service
-  sudo chmod +x ./scripts/*
+  chmod +x ./scripts/*
   cd scripts
   sudo bash ./install-wavepi.sh
   cd ..
