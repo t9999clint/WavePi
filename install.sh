@@ -82,11 +82,12 @@ then
         read -p "PRESS ENTER KEY IF OK, CTRL-C to quit"
         export CCFLAGS="-Ofast -march=native -ftree-vectorize -funsafe-math-optimizations"
     fi
-
+  
+  echo "Optimizations chosen... $CCFLAGS"
 ##Alert user that manual settings were chosen, and display what they are.
 else
-echo "Optimizations chosen... $CCFLAGS"
-read -p "Manual config detected, PRESS ENTER KEY IF READY, CTRL-C to quit!"
+  echo "Optimizations chosen... $CCFLAGS"
+  read -p "Manual config detected, PRESS ENTER KEY IF READY, CTRL-C to quit!"
 fi
 
 ##Make CCX match CC
