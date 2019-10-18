@@ -13,7 +13,7 @@
 AUTO_SETUP_LOCALE=en_GB.UTF-8
 
 # Keyboard Layout eg: "gb" / "us" / "de" / "fr"
-AUTO_SETUP_KEYBOARD_LAYOUT=us
+AUTO_SETUP_KEYBOARD_LAYOUT=gb
 
 # Timezone eg: "Europe/London" / "America/New_York" | Full list (TZ*): https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 AUTO_SETUP_TIMEZONE=Europe/London
@@ -61,14 +61,14 @@ AUTO_UNMASK_LOGIND=0
 # - Option 0 = Copy your script to /boot/Automation_Custom_Script.sh and it will be executed automatically.
 # - Option 1 = Host your script online, then use e.g. AUTO_SETUP_CUSTOM_SCRIPT_EXEC=http://myweb.com/myscript.sh and it will be downloaded and executed automatically.
 # - Executed script log: /var/tmp/dietpi/logs/dietpi-automation_custom_script.log
-AUTO_SETUP_CUSTOM_SCRIPT_EXEC=1
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=0
 
 ##### Software Options #####
 # SSH Server Selection: 0=none/custom | -1=Dropbear | -2=OpenSSH
 AUTO_SETUP_SSH_SERVER_INDEX=-1
 
 # File Server Selection: 0=none/custom | -1=ProFTP | -2=Samba
-AUTO_SETUP_FILE_SERVER_INDEX=-1
+AUTO_SETUP_FILE_SERVER_INDEX=1
 
 # Logging Mode Selection: 0=none/custom | -1=RAMlog 1h clear | -2=RAMlog 1h save clear | -3=rsyslog + logrotate
 AUTO_SETUP_LOGGING_INDEX=-1
@@ -92,7 +92,7 @@ AUTO_SETUP_AUTOSTART_LOGIN_USER=root
 # On first login, run update, initial setup and software installs without any user input
 # - Setting this to "1" is required for below settings to take effect
 # - It is HIGHLY recommended to also set CONFIG_BOOT_WAIT_FOR_NETWORK=2, to force infinite wait for network connection during boot and prevent connection timeout errors.
-AUTO_SETUP_AUTOMATED=0
+AUTO_SETUP_AUTOMATED=1
 
 # Global Password to be applied for the system
 # - Affects user "root" and "dietpi" login passwords, and, all software installed by dietpi-software, that requires a login password
@@ -112,7 +112,6 @@ AUTO_SETUP_INSTALL_SOFTWARE_ID=16
 AUTO_SETUP_INSTALL_SOFTWARE_ID=72
 AUTO_SETUP_INSTALL_SOFTWARE_ID=70
 AUTO_SETUP_INSTALL_SOFTWARE_ID=94
-
 
 #------------------------------------------------------------------------------------------------------
 # D I E T - P I
@@ -163,7 +162,7 @@ CONFIG_G_CHECK_URL_TIMEOUT=5
 CONFIG_G_CHECK_URL_ATTEMPTS=3
 
 # DietPi checks for updates: Allows DietPi to check for updates on a daily basis and boot using a <1kb file download.
-CONFIG_CHECK_DIETPI_UPDATES=0
+CONFIG_CHECK_DIETPI_UPDATES=1
 # Optional: Automatically update DietPi when updates are available. Requires: CONFIG_CHECK_DIETPI_UPDATES=1
 CONFIG_AUTO_DIETPI_UPDATES=0
 
@@ -171,10 +170,10 @@ CONFIG_AUTO_DIETPI_UPDATES=0
 CONFIG_NTP_MODE=2
 
 # WiFi country code: 2 character value (eg GB US DE JP): https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-CONFIG_WIFI_COUNTRY_CODE=US
+CONFIG_WIFI_COUNTRY_CODE=GB
 
 # Serial Console: Set to 0 if you do not require serial console.
-CONFIG_SERIAL_CONSOLE_ENABLE=0
+CONFIG_SERIAL_CONSOLE_ENABLE=1
 
 # Soundcard
 CONFIG_SOUNDCARD=none
