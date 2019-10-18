@@ -12,7 +12,7 @@ apt install librtmidi3 -yy
 apt install librtmidi4 -yy
 apt install python3-dev libasound2 libasound2-dev -yy
 apt install python3-setuptools -yy
-apt install jackd2 libjack-jackd2-dev -yy
+DEBIAN_FRONTEND='noninteractive' apt-get install -y jackd2 libjack-jackd2-dev
 apt install libjack-jackd2-0 -yy
 
 sudo pip3 install --upgrade pip
