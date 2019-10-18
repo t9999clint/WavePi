@@ -86,13 +86,13 @@ AUTO_SETUP_AUTOSTART_TARGET_INDEX=0
 # Autologin user name
 # - This user must exist before firstrun installs, otherwise it will be reverted to root.
 # - Applies to all autostart options but: 0, 6, 14 and 16
-AUTO_SETUP_AUTOSTART_LOGIN_USER=dietpi
+AUTO_SETUP_AUTOSTART_LOGIN_USER=root
 
 ##### Non-interactive Firstrun Setup #####
 # On first login, run update, initial setup and software installs without any user input
 # - Setting this to "1" is required for below settings to take effect
 # - It is HIGHLY recommended to also set CONFIG_BOOT_WAIT_FOR_NETWORK=2, to force infinite wait for network connection during boot and prevent connection timeout errors.
-AUTO_SETUP_AUTOMATED=1
+AUTO_SETUP_AUTOMATED=0
 
 # Global Password to be applied for the system
 # - Affects user "root" and "dietpi" login passwords, and, all software installed by dietpi-software, that requires a login password
