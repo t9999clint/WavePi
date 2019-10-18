@@ -39,16 +39,15 @@ I will be making a rasbian image for the ras pi 3, but I want to add a few more 
 8. use tar to extract the archive -- **tar xzf v0.8.0.tar.gz**
 9. rename extracted folder to WavePi -- **mv WavePi-0.8.0 WavePi** 
 10. change to WavePi directory -- **cd WavePi**
-11. open install-munt.sh and enable the appropriate cpu optimizations -- **nano install.sh**
-12. make it executable -- **chmod +x ./install.sh**
-13. run install-munt.sh as root to compile and install munt to your system. Go get some coffee this will take a bit. -- **sudo ./install.sh**
-14. copy over soundfonts and munt rom files to appropriate folders using filezilla or something.
-15. change to the configs subfolder -- **cd ../configs**
-16. use aplay to get your alsa device number. -- **aplay -l**
-17. edit main.cfg file and modify the device numbers to match your hardware -- **nano main.cfg**
-18. edit the 000.cfg and modify the soundfont settings to match the soundfont you downloaded. -- **nano 000.cfg**
-19. (optional) create more config files by copying the 000.cfg and configure them for other soundfonts. -- **cp 000.cfg 003.cfg**
-20. reboot -- **sudo reboot**
+11. make it executable -- **chmod +x ./install.sh**
+12. run install-munt.sh as root to compile and install munt to your system. Go get some coffee this will take a bit. -- **sudo ./install.sh**
+13. copy over soundfonts and munt rom files to appropriate folders using filezilla or something.
+14. change to the configs subfolder -- **cd ../configs**
+15. use aplay to get your alsa device number. -- **aplay -l**
+16. edit main.cfg file and modify the device numbers to match your hardware -- **nano main.cfg**
+17. edit the 000.cfg and modify the soundfont settings to match the soundfont you downloaded. -- **nano 000.cfg**
+18. (optional) create more config files by copying the 000.cfg and configure them for other soundfonts. -- **cp 000.cfg 003.cfg**
+19. reboot -- **sudo reboot**
 
 Now there are two ways to control WavePi, either by using the wavepi command, or by sending it special sysex messages.
 
