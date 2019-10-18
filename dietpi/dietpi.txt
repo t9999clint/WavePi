@@ -176,7 +176,7 @@ CONFIG_WIFI_COUNTRY_CODE=GB
 CONFIG_SERIAL_CONSOLE_ENABLE=1
 
 # Soundcard
-CONFIG_SOUNDCARD=none
+CONFIG_SOUNDCARD=rpi-bcm2835-3.5mm
 
 # LCD Panel addon
 # - Do not modify, you must use dietpi-config to configure/set options
