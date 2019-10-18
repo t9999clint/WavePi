@@ -126,7 +126,7 @@ export CXXFLAGS="$CCFLAGS"
   
 ##Clean up munt compile
   cd $CURRENT_DIR
-  sudo rm -R ./mt32
+  sudo rm -R ./tmp
   
 ## Install WavePi service
   chmod +x ./scripts/*
