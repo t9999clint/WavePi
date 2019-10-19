@@ -2,6 +2,9 @@
 ## soundfont.sh synth script example
 ## This script is meant to be run with the following syntax soundfont.sh <sf2 file> <alsa device number>
 
+##ugly workaround to fix fluidsynth not quitting properly
+killall fluidsynth
+
 ## set of reverb preferences to more closely match soundblaster awe
 fluid_chorus_type=1
 fluid_chorus_depth=8
