@@ -118,9 +118,9 @@ StartSynth () {
             ## echo "success??"
 	    aconnect 14:0 $MIDI_NUMBER:0
 	    ## UGLY HACK, UNTIL I FIX MIDI_NUMBER ISSUE (should be fixed now)##
-            #aconnect 14:0 128:0 &
-	    #aconnect 14:0 129:0 &
-	    #aconnect 14:0 130:0 &
+            aconnect 14:0 128:0 &
+	    aconnect 14:0 129:0 &
+	    aconnect 14:0 130:0 &
             ## END OF UGLY HACK##
             SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
         fi
