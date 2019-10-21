@@ -72,7 +72,7 @@ StartSynth () {
     then
         SYNTH_NAME="${FILE_NAME%.*}"
         COMMAND="soundfont.sh $1"
-        SYNTH_SEARCH="FLUID"
+        SYNTH_SEARCH="FLUID Synth"
     else
         echo "ERROR: FILE EXTENSION $FILE_EXT NOT SUPPORTED!"
         ##StartSynth "$CURRENT_DIR/../configs/$DEFAULT_CONFIG.cfg"
@@ -117,10 +117,11 @@ StartSynth () {
             ## join synth to MIDI loopback device, then save status
             ## echo "success??"
 	    aconnect 14:0 $MIDI_NUMBER:0
+	    aconnect 14:0 '$SYNTH_SEARCH':0
 	    ## UGLY HACK, UNTIL I FIX MIDI_NUMBER ISSUE (should be fixed now)##
             aconnect 14:0 128:0 &
-	    aconnect 14:0 129:0 &
-	    aconnect 14:0 130:0 &
+	    ##aconnect 14:0 129:0 &
+	    ##aconnect 14:0 130:0 &
             ## END OF UGLY HACK##
             SaveStatusToFile "$SYNTH_PID" "$SYNTH_NAME" "$1"
         fi
