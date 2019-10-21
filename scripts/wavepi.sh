@@ -98,7 +98,7 @@ StartSynth () {
 	WaitForSynth "$SYNTH_SEARCH"
         
         ## check if midi actually loaded or not
-	echo "DEBUG MESSAGE - MIDI NUMBER>$MIDI_NUMBER<"
+	echo "MIDI NUMBER DEtECTED AS >$MIDI_NUMBER<"
 	
 	if [ "$MIDI_NUMBER" == "0" ]
         then
@@ -119,7 +119,7 @@ StartSynth () {
 	    aconnect 14:0 $MIDI_NUMBER:0
 	    aconnect 14:0 '$SYNTH_SEARCH':0
 	    ## UGLY HACK, UNTIL I FIX MIDI_NUMBER ISSUE (should be fixed now)##
-            aconnect 14:0 128:0 &
+            ##aconnect 14:0 128:0 &
 	    ##aconnect 14:0 129:0 &
 	    ##aconnect 14:0 130:0 &
             ## END OF UGLY HACK##
