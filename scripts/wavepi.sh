@@ -134,7 +134,7 @@ StartSynth () {
 if [ "$1" == "stop" ] || [ "$1" == "STOP" ]
 then
     StopSynth
-    SaveStatusToFile -1 "Synth has been stopped." -1
+    SaveStatusToFile -1 "WavePi Stopped." -1
 
 ## Check if requested config number exists
 elif [ -f "$CONFIG_REQUEST" ]
