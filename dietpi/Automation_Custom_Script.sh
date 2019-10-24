@@ -6,10 +6,10 @@ sudo apt-get install nano -y
 sudo apt-get install tar -y
 
 cd /home/dietpi
-wget https://github.com/t9999clint/WavePi/archive/v0.8.1.tar.gz
-tar -xzf v0.8.1.tar.gz
-rm v0.8.1.tar.gz
-mv WavePi-0.8.1 WavePi
+wget https://github.com/t9999clint/WavePi/archive/v0.9.0.tar.gz
+tar -xzf v0.9.0.tar.gz
+rm v0.9.0.tar.gz
+mv WavePi-0.9.0 WavePi
 cd WavePi
 
 chmod +x ./install.sh
@@ -19,4 +19,5 @@ service proftpd restart
 sudo usermod -a -G audio dietpi
 sudo usermod -a -G i2c dietpi
 ./install.sh
+echo "Updating file permissions..."
 sudo chown -R dietpi /home/dietpi/WavePi
