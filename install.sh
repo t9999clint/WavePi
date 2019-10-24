@@ -173,20 +173,20 @@ export CXXFLAGS="$CCFLAGS"
   chmod +x ./scripts/*
 
 ## make symlinks...
-ln -s $CURRENT_DIR/scripts/wavepi.sh /usr/bin/wavepi
-ln -s $CURRENT_DIR/scripts/wavepi-service.sh /etc/init.d/wavepi
-ln -s $CURRENT_DIR/scripts/wavepi-service.config /etc/init/wavepi.conf
+  sudo ln -s $CURRENT_DIR/scripts/wavepi.sh /usr/bin/wavepi
+  sudo ln -s $CURRENT_DIR/scripts/wavepi-service.sh /etc/init.d/wavepi
+  sudo ln -s $CURRENT_DIR/scripts/wavepi-service.config /etc/init/wavepi.conf
 
 ## Downloading Soundfont
-cd soundfonts
-wget https://downloads.kor.ninja/Music/wavepi/PRO7USE.sf2
-cd ..
+  cd soundfonts
+  wget https://downloads.kor.ninja/Music/wavepi/PRO7USE.sf2
+  cd ..
 
 ## register service to debian
-update-rc.d wavepi defaults
+  sudo update-rc.d wavepi defaults
 
 sleep 3
-service wavepi start
+  sudo service wavepi start
 
 echo "scripts installed. just type wavepi and Have fun!!"
 
