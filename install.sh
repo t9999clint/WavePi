@@ -168,6 +168,7 @@ export CXXFLAGS="$CCFLAGS"
 ##Clean up installs
   cd $CURRENT_DIR
   sudo rm -R ./tmp
+  sudo ldconfig
   
 ## Install WavePi service
   chmod +x ./scripts/*
