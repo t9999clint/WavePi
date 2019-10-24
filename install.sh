@@ -96,6 +96,23 @@ export CXXFLAGS="$CCFLAGS"
 ## Setup development enviroment
   sudo apt update
   sudo apt install build-essential cmake libasound-dev libx11-dev libxpm-dev libxt-dev -yy
+  sudo apt install alsa-utils python3 python3-pip git -yy
+  sudo apt install librtmidi3 -yy
+  sudo apt install librtmidi4 -yy
+  sudo apt install python3-dev libasound2 libasound2-dev -yy
+  sudo apt install python3-setuptools -yy
+  DEBIAN_FRONTEND='noninteractive' sudo apt-get install -y jackd2 libjack-jackd2-dev
+  sudo apt install libjack-jackd2-0 -yy
+
+## Install Python stuffs
+  sudo pip3 install --upgrade pip
+  sudo pip3 install cython
+  sudo pip3 install rtmidi
+  sudo pip3 install python-rtmidi
+  sudo pip3 install mido
+  sudo pip3 install RPLCD
+  sudo pip3 install smbus
+  sudo apt install libgtk2.0-dev -yy
   sudo usermod -a -G audio $USER
   sudo usermod -a -G i2c $USER
   
@@ -103,8 +120,7 @@ export CXXFLAGS="$CCFLAGS"
   CURRENT_DIR=$(dirname $(readlink -f $0))
   CPUCores=$(nproc)
   
-
-## Download mt32emu, replace download link with latest version (optional)...
+## Download mt32emu...
   mkdir tmp
   cd tmp
   wget https://github.com/munt/munt/archive/munt_2_3_0.tar.gz
@@ -122,17 +138,57 @@ export CXXFLAGS="$CCFLAGS"
   cd mt32emu_alsadrv
   make -j $CPUCores
   sudo make install
-  cd ..
+  cd ../..
   
-##Clean up munt compile
+## Compile and install ttymidi
+  git clone https://github.com/ElBartoME/ttymidi/
+  cd ttymidi/
+  make -j $CPUCores
+  sudo make install
+  cd ..
+
+## Compile and install rtmidi
+  git clone https://github.com/SpotlightKid/python-rtmidi.git
+  cd python-rtmidi
+  git submodule update --init
+  python3 setup.py install
+  cd ..
+
+## Compile and install Fluidsynth
+  wget https://github.com/FluidSynth/fluidsynth/archive/v2.0.7.tar.gz
+  tar xzf v2.0.7.tar.gz
+  cd fluidsynth-2.0.7
+  mkdir build
+  cd build
+  cmake ..
+  make -j $CPUCores
+  sudo make install
+  cd ../..
+  
+##Clean up installs
   cd $CURRENT_DIR
   sudo rm -R ./tmp
   
 ## Install WavePi service
   chmod +x ./scripts/*
-  cd scripts
-  sudo bash ./install-wavepi.sh
-  cd ..
+
+## make symlinks...
+ln -s $CURRENT_DIR/scripts/wavepi.sh /usr/bin/wavepi
+ln -s $CURRENT_DIR/scripts/wavepi-service.sh /etc/init.d/wavepi
+ln -s $CURRENT_DIR/scripts/wavepi-service.config /etc/init/wavepi.conf
+
+## Downloading Soundfont
+cd soundfonts
+wget https://downloads.kor.ninja/Music/wavepi/PRO7USE.sf2
+cd ..
+
+## register service to debian
+update-rc.d wavepi defaults
+
+sleep 3
+service wavepi start
+
+echo "scripts installed. just type wavepi and Have fun!!"
 
 ##debug step, to be removed at later date...
-echo "$CXXFLAGS"
+##echo "$CXXFLAGS"
