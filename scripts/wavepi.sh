@@ -98,7 +98,7 @@ StartSynth () {
 	WaitForSynth "$SYNTH_SEARCH"
         
         ## check if midi actually loaded or not
-	echo "MIDI NUMBER DEtECTED AS >$MIDI_NUMBER<"
+	echo "MIDI NUMBER DETECTED AS >$MIDI_NUMBER<"
 	
 	if [ "$MIDI_NUMBER" == "0" ]
         then
@@ -117,7 +117,7 @@ StartSynth () {
             ## join synth to MIDI loopback device, then save status
             ## echo "success??"
 	    aconnect 14:0 $MIDI_NUMBER:0
-	    aconnect 14:0 '$SYNTH_SEARCH':0
+	    aconnect 14:0 $SYNTH_SEARCH:0
 	    ## UGLY HACK, UNTIL I FIX MIDI_NUMBER ISSUE (should be fixed now)##
             ##aconnect 14:0 128:0 &
 	    ##aconnect 14:0 129:0 &
