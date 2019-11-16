@@ -125,7 +125,7 @@ class MidiInputHandler(object):
                     lcd.write_first_line(LCD_message.rstrip(),"sysex_lcd")
 
             elif msg.data[0:2] == (0x66, 0x04):             # WavePi profile change SysEx message
-                os.system('wavepi 00' + str(msg.data[-1]))
+                os.system('wavepi ' + format(msg.data[-1], '03'))
         elif msg.type == 'control_change':
             if msg.control == 123:
                 self.lcd.turn_channel_off(msg.channel)
