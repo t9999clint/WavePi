@@ -67,7 +67,7 @@ start ()
     ## Check if Serial is enabled and run the Serial Midi script as root if it is...
     if [ "$SERIAL_ENABLE" == "true" ] || [ "$SERIAL_ENABLE" == "TRUE" ] || [ "$SERIAL_ENABLE" == "YES" ] || [ "$SERIAL_ENABLE" == "yes" ] || [ "$SERIAL_ENABLE" == "1" ]
     then
-        nice -n $NICE_LEVEL sudo -u $WAVEPI_USER $CURRENT_DIR/serial-midi.sh $SERIAL_DEVICE &
+        nice -n $NICE_LEVEL $CURRENT_DIR/serial-midi.sh $SERIAL_DEVICE &
         sleep 4
 	aconnect 'ttymidi':0 'Midi Through':0
     fi
